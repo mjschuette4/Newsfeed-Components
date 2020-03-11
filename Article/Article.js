@@ -107,8 +107,44 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+function componentCreator(title, date, firstParagraph, secondParagraph, thirdParagraph){
+
+  const panel = document.createElement('div');
+  const panelTitle = document.createElement('h2');
+  const panelDate = document.createElement('p');
+  const panelFirstParagraph = document.createElement('p');
+  const panelSecondParagraph = document.createElement('p');
+  const panelThirdParagraph = document.createElement('p');
+  const panelButton = document.createElement('span');
+
+  panelTitle.textContent = title;
+  panelDate.textContent = date;
+  panelFirstParagraph.textContent = firstParagraph;
+  panelSecondParagraph.textContent = secondParagraph;
+  panelThirdParagraph.textContent = thirdParagraph;
+  panelButton.textContent = 'Expand me';
+
+  panel.appendChild(panelTitle);
+  panel.appendChild(panelDate);
+  panel.appendChild(panelFirstParagraph);
+  panel.appendChild(panelSecondParagraph);
+  panel.appendChild(panelThirdParagraph);
+  panel.appendChild(panelButton);
+
+  panel.classList.add('article');
+  panelDate.classList.add('date');
+  panelButton.classList.add('expandButton');
+  panelButton.addEventListener('click', x => {
+    panel.classList.toggle('article-open');
+  } ); 
+
+  return panel;
+}
+data.map(x => {
+  document.querySelector('.articles').append(componentCreator(x.title, x.date, x.firstParagraph, x.secondParagraph, x.thirdParagraph))
+});
